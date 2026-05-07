@@ -19,8 +19,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className={`${josefinSans.variable} h-full antialiased`}>
-			<body className="min-h-full flex flex-col">
-				<main className="mx-auto w-full max-w-5xl px-4">{children}</main>
+			<body className="h-screen bg-bg text-text flex flex-col">
+				<main className="flex-1 w-full">
+					<div className="mx-auto w-full h-full max-w-5xl px-4">{children}</div>
+				</main>
 			</body>
 		</html>
 	);

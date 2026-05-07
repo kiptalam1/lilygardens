@@ -1,2 +1,33 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: oklch(98.5% 0 0);
+  --color-surface: oklch(96.7% 0.001 286.375);
+  --color-cards: oklch(92% 0.004 286.32);
+  --color-text: oklch(21% 0.006 285.885);
+  --color-text-muted: oklch(44.2% 0.017 285.786);
+  --color-border: oklch(87.1% 0.006 286.286);
+
+  --color-success:  oklch(65% 0.16 145);
+  --color-warning: oklch(75% 0.16 85);
+  --color-danger: oklch(60% 0.20 25);
+  --color-info: oklch(65% 0.12 230);
+  --color-brand: oklch(58.5% 0.233 277.117);
+}
+
+.dark {
+  --color-bg:oklch(14.1% 0.005 285.823);
+  --color-surface: oklch(21% 0.006 285.885);
+  --color-cards: oklch(27.4% 0.006 286.033);
+  --color-text: oklch(96.7% 0.001 286.375);
+  --color-text-muted: oklch(70.5% 0.015 286.067);
+  --color-border: oklch(27.4% 0.006 286.033);
+
+  --color-success: oklch(70% 0.16 145);
+  --color-warning: oklch(78% 0.16 85);
+  --color-danger: oklch(65% 0.20 25);
+  --color-info: oklch(70% 0.12 230);
+  --color-brand:oklch(51.1% 0.262 276.966);
+}
