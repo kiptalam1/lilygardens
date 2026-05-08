@@ -1,15 +1,22 @@
 "use client";
+import { inter } from "@/app/page";
 import { useState } from "react";
 
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
+	const [formData, setFormData] = useState({
+		nationalId: "",
+		password: "",
+	});
 
 	return (
 		<div className="flex items-center h-full w-full">
 			<form className="flex flex-col gap-4 bg-card mx-auto w-full sm:max-w-sm md:max-w-md lg:max-w-lg py-10 px-6 rounded-lg">
 				{/* heading */}
 				<div className="text-center mb-4">
-					<h1 className="text-3xl text-brand/90">Lily Gardens</h1>
+					<h1 className={`text-3xl text-brand/90 ${inter.className}`}>
+						Lily Gardens
+					</h1>
 				</div>
 
 				{/* national id */}
@@ -23,6 +30,13 @@ export default function LoginPage() {
 						autoComplete="off"
 						name="nationalId"
 						id="nationalId"
+						value={formData.nationalId}
+						onChange={(e) =>
+							setFormData((prev) => ({
+								...prev,
+								[e.target.name]: e.target.value.replace(/\D/g, ""),
+							}))
+						}
 						aria-label="Enter your national Id"
 						placeholder="National ID"
 						className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand placeholder:text-sm text-lg w-full"
@@ -36,6 +50,13 @@ export default function LoginPage() {
 						required
 						name="password"
 						id="password"
+						value={formData.password}
+						onChange={(e) =>
+							setFormData((prev) => ({
+								...prev,
+								[e.target.name]: e.target.value,
+							}))
+						}
 						aria-label="Enter your password"
 						placeholder="Password"
 						className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand placeholder:text-sm text-lg w-full pr-16"
