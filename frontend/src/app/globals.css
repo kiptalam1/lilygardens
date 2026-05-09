@@ -31,3 +31,12 @@
   --color-info: oklch(70% 0.12 230);
   --color-brand:oklch(51.1% 0.262 276.966);
 }
+
+.scrollbar {
+  scrollbar-width: none;
+  scrollbar-color: var(--color-border) transparent;
+  --webkit-scrollbar-thumb: var(--color-border);
+  --webkit-scrollbar-thumb:hover: var(--color-border);
+  --webkit-scrollbar-track: transparent;
+  --webkit-scrollbar-width: 0;
+}

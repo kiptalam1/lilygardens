@@ -1,18 +1,57 @@
-import React, { SetStateAction, SyntheticEvent } from "react";
+import React, { SetStateAction, SyntheticEvent, useState } from "react";
+import OccupantFields, { TenantData } from "./OccupantFields";
 
-export default function createHouseholdForm({
+export type OccupantsData = {
+	roomId: string;
+	householdType: string;
+	tenants: TenantData[];
+};
+
+export default function CreateHouseholdForm({
 	open,
 	setOpen,
 }: {
 	open: boolean;
 	setOpen: React.Dispatch<SetStateAction<boolean>>;
 }) {
+	const [formData, setFormData] = useState<OccupantsData>({
+		roomId: "",
+		householdType: "",
+		tenants: [
+			{
+				fullName: "",
+				nationalId: "",
+				phone: "",
+				email: "",
+				startDate: "",
+				endDate: "",
+			},
+		],
+	});
+
 	if (!open) {
 		return null;
 	}
 
 	function closeModal() {
 		setOpen(false);
+	}
+
+	function addTenant() {
+		setFormData((prev) => ({
+			...prev,
+			tenants: [
+				...prev.tenants,
+				{
+					fullName: "",
+					nationalId: "",
+					phone: "",
+					email: "",
+					startDate: "",
+					endDate: "",
+				},
+			],
+		}));
 	}
 
 	function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
@@ -29,8 +68,8 @@ export default function createHouseholdForm({
 			<form
 				onClick={(e) => e.stopPropagation()}
 				onSubmit={handleSubmit}
-				className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-card px-4 py-6 rounded-lg space-y-4">
-				<h1 className="text-2xl text-brand ">Assign Occupants</h1>
+				className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-card px-4 py-6 rounded-lg space-y-4 max-h-5/6 overflow-y-auto scroll-smooth scrollbar">
+				<h1 className="text-2xl text-brand ">Add Occupants</h1>
 
 				{/* select room */}
 				<div className="flex flex-col gap-2">
@@ -45,9 +84,7 @@ export default function createHouseholdForm({
 						name="name"
 						required
 						className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand w-full ">
-						<option value="" selected>
-							Select Room
-						</option>
+						<option value="">Select Room</option>
 						<option value="A1">A1</option>
 						<option value="A2">A2</option>
 						<option value="A3">A3</option>
@@ -64,7 +101,7 @@ export default function createHouseholdForm({
 							name="householdType"
 							value="family"
 							type="radio"
-							checked
+							defaultChecked
 							className="w-4 h-4 appearance-none border border-zinc-400 rounded-full checked:border-brand checked:border-4 outline-none"></input>
 						<label htmlFor="family">Family</label>
 					</div>
@@ -81,7 +118,22 @@ export default function createHouseholdForm({
 				</div>
 
 				{/* Occupants */}
+				{formData.tenants.map((tenant, index) => (
+					<OccupantFields
+						key={index}
+						index={index}
+						tenant={tenant}
+						formData={formData}
+						setFormData={setFormData}
+					/>
+				))}
 
+				<button
+					type="button"
+					onClick={addTenant}
+					className="border border-text-muted py-1 px-2 rounded-lg cursor-pointer text-text-muted text-sm font-semibold hover:opacity-70 transition-opacity duration-150">
+					+ Add Another
+				</button>
 				{/* buttons */}
 				<div className="flex gap-4 mt-6 justify-end">
 					<button
