@@ -1,5 +1,6 @@
 import React, { SetStateAction, SyntheticEvent, useState } from "react";
 import OccupantFields, { TenantData } from "./OccupantFields";
+import { BiTrash } from "react-icons/bi";
 
 export type OccupantsData = {
 	roomId: string;
@@ -53,6 +54,8 @@ export default function CreateHouseholdForm({
 			],
 		}));
 	}
+
+	function removeTenant() {}
 
 	function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -125,15 +128,18 @@ export default function CreateHouseholdForm({
 						tenant={tenant}
 						formData={formData}
 						setFormData={setFormData}
+						onRemove={removeTenant}
 					/>
 				))}
 
-				<button
-					type="button"
-					onClick={addTenant}
-					className="border border-text-muted py-1 px-2 rounded-lg cursor-pointer text-text-muted text-sm font-semibold hover:opacity-70 transition-opacity duration-150">
-					+ Add Another
-				</button>
+				<div className="flex justify-end">
+					<button
+						type="button"
+						onClick={addTenant}
+						className="border border-text-muted py-1 px-2 rounded-lg cursor-pointer text-text-muted text-sm font-semibold hover:opacity-70 transition-opacity duration-150">
+						+ Add Another
+					</button>
+				</div>
 				{/* buttons */}
 				<div className="flex gap-4 mt-6 justify-end">
 					<button

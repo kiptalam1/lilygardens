@@ -1,5 +1,6 @@
 import React, { ChangeEvent, SetStateAction } from "react";
 import { OccupantsData } from "./CreateHouseholdForm";
+import { BiTrash } from "react-icons/bi";
 
 export type TenantData = {
 	fullName: string;
@@ -15,11 +16,13 @@ export default function OccupantFields({
 	tenant,
 	formData,
 	setFormData,
+	onRemove,
 }: {
 	index: number;
 	tenant: TenantData;
 	formData: OccupantsData;
 	setFormData: React.Dispatch<SetStateAction<OccupantsData>>;
+	onRemove: () => void;
 }) {
 	function handleTenantTextInputChange(e: ChangeEvent<HTMLInputElement>) {
 		const updatedTenants = [...formData.tenants];
@@ -117,10 +120,18 @@ export default function OccupantFields({
 					value={tenant.email as string}
 					onChange={handleTenantTextInputChange}
 					inputMode="email"
-					maxLength={8}
 					placeholder="Enter tenant's email address"
 					className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand placeholder:text-sm text-lg w-full"
 				/>
+			</div>
+			<div className="flex justify-end">
+				<button
+					type="button"
+					onClick={onRemove}
+					aria-label="delete tenant"
+					className=" cursor-pointer text-danger hover:text-danger/60 transition duration-150">
+					<BiTrash size={20} />
+				</button>
 			</div>
 		</div>
 	);
