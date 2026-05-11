@@ -1,23 +1,22 @@
-import Link from "next/link";
 import React from "react";
-
-export default function TenantCard() {
+import Link from "next/link";
+export default function RoomCard() {
 	return (
 		<Link
-			href="/admin/tenants/user"
+			href="/admin/rooms/room"
 			className="bg-card p-4 rounded-xl space-y-3 border border-border hover:border-brand/30 transition duration-150">
 			<div>
-				<h3 className="font-semibold truncate ">Adams Kiptalam</h3>
-				<p className="text-sm text-text-muted">Room A1</p>
+				<h3 className="font-semibold truncate ">A1</h3>
+				<p className="text-sm text-text-muted">capacity</p>
 			</div>
 
 			<div className="flex items-center justify-between text-sm">
 				<span className="px-2.5 py-1 rounded-full text-xs font-medium bg-success/20 text-success">
-					Paid
+					Vaccant
 				</span>
 
-				<span className="px-2.5 py-1 rounded-full text-xs font-medium bg-brand/10 text-brand">
-					Active
+				<span className="px-2.5 py-1 rounded-full text-xs font-medium bg-surface/40 text-text-muted">
+					5000
 				</span>
 			</div>
 		</Link>
