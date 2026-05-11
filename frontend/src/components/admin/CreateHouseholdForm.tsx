@@ -1,11 +1,19 @@
 import React, { SetStateAction, SyntheticEvent, useState } from "react";
 import OccupantFields, { TenantData } from "./OccupantFields";
-import { BiTrash } from "react-icons/bi";
 
 export type OccupantsData = {
 	roomId: string;
 	householdType: string;
 	tenants: TenantData[];
+	startDate: string;
+	endDate: string | null;
+};
+
+const tenantFields = {
+	fullName: "",
+	nationalId: "",
+	phone: "",
+	email: "",
 };
 
 export default function CreateHouseholdForm({
@@ -18,16 +26,9 @@ export default function CreateHouseholdForm({
 	const [formData, setFormData] = useState<OccupantsData>({
 		roomId: "",
 		householdType: "",
-		tenants: [
-			{
-				fullName: "",
-				nationalId: "",
-				phone: "",
-				email: "",
-				startDate: "",
-				endDate: "",
-			},
-		],
+		tenants: [tenantFields],
+		startDate: "",
+		endDate: "",
 	});
 
 	if (!open) {
@@ -41,21 +42,16 @@ export default function CreateHouseholdForm({
 	function addTenant() {
 		setFormData((prev) => ({
 			...prev,
-			tenants: [
-				...prev.tenants,
-				{
-					fullName: "",
-					nationalId: "",
-					phone: "",
-					email: "",
-					startDate: "",
-					endDate: "",
-				},
-			],
+			tenants: [...prev.tenants, tenantFields],
 		}));
 	}
 
-	function removeTenant() {}
+	function removeTenant(index: number) {
+		setFormData((prev) => ({
+			...prev,
+			tenants: prev.tenants.filter((_, i) => i !== index),
+		}));
+	}
 
 	function handleSubmit(e: SyntheticEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -71,7 +67,7 @@ export default function CreateHouseholdForm({
 			<form
 				onClick={(e) => e.stopPropagation()}
 				onSubmit={handleSubmit}
-				className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-card px-4 py-6 rounded-lg space-y-4 max-h-5/6 overflow-y-auto scroll-smooth scrollbar">
+				className="w-full max-w-2xl bg-card px-4 py-6 rounded-lg space-y-4 max-h-5/6 overflow-y-auto scroll-smooth scrollbar">
 				<h1 className="text-2xl text-brand ">Add Occupants</h1>
 
 				{/* select room */}
@@ -128,7 +124,7 @@ export default function CreateHouseholdForm({
 						tenant={tenant}
 						formData={formData}
 						setFormData={setFormData}
-						onRemove={removeTenant}
+						onRemove={() => removeTenant(index)}
 					/>
 				))}
 
@@ -137,9 +133,59 @@ export default function CreateHouseholdForm({
 						type="button"
 						onClick={addTenant}
 						className="border border-text-muted py-1 px-2 rounded-lg cursor-pointer text-text-muted text-sm font-semibold hover:opacity-70 transition-opacity duration-150">
-						+ Add Another
+						+ Add Occupant
 					</button>
 				</div>
+
+				{/* start and end date */}
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div>
+						<label
+							htmlFor="startDate"
+							className="text-sm text-text-muted font-semibold">
+							Start Date (MM/DD/YYYY)
+						</label>
+						<input
+							type="date"
+							name="startDate"
+							id="startDate"
+							autoComplete="off"
+							value={formData.startDate}
+							onChange={(e) =>
+								setFormData((prev) => ({
+									...prev,
+									[e.target.name]: e.target.value,
+								}))
+							}
+							required
+							placeholder="select date"
+							className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand placeholder:text-sm text-lg w-full"
+						/>
+					</div>
+					<div>
+						<label
+							htmlFor="endDate"
+							className="text-sm text-text-muted font-semibold">
+							End Date (MM/DD/YYYY)(Optional)
+						</label>
+						<input
+							type="date"
+							name="endDate"
+							id="endDate"
+							autoComplete="off"
+							value={formData.endDate as string}
+							onChange={(e) =>
+								setFormData((prev) => ({
+									...prev,
+									[e.target.name]: e.target.value,
+								}))
+							}
+							placeholder="select date"
+							className="border border-border rounded-lg px-4 py-1 outline-none focus:ring-2 focus:ring-brand placeholder:text-sm text-lg w-full"
+						/>
+					</div>
+				</div>
+
 				{/* buttons */}
 				<div className="flex gap-4 mt-6 justify-end">
 					<button

@@ -7,8 +7,6 @@ export type TenantData = {
 	nationalId: string;
 	phone: string;
 	email: string | null;
-	startDate: string;
-	endDate: string | null;
 };
 
 export default function OccupantFields({
@@ -45,7 +43,7 @@ export default function OccupantFields({
 	}
 
 	return (
-		<div className="space-y-3 mt-2 border border-zinc-400 rounded-lg p-2">
+		<div className="space-y-3 mt-2 border border-zinc-400 rounded-lg p-4 sm:p-6">
 			<div className="flex flex-col gap-0.5">
 				<label
 					htmlFor="fullName"
