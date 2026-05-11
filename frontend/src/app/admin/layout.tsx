@@ -21,7 +21,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="h-screen bg-surface text-text grid md:grid-cols-[240px_1fr]">
 			{/* desktop sidebar */}
-			<aside className="hidden md:block border-r border-border">
+			<aside className="hidden md:block border-r border-border overflow-y-auto">
 				<Sidebar />
 			</aside>
 
@@ -32,14 +32,14 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 						className="inset-0 bg-black/50 absolute"
 						onClick={() => setSidebarOpen(false)}
 					/>
-					<aside className="absolute h-full w-64 top-0 left-0 bg-card border-r border-border rounded-r-sm">
+					<aside className="absolute h-full w-64 top-0 left-0 bg-card border-r border-border rounded-r-sm overflow-y-auto">
 						<Sidebar />
 					</aside>
 				</div>
 			)}
 
 			<div className="flex flex-col gap-1 h-full">
-				<header className=" flex md:justify-end p-4 items-center">
+				<header className="md:hidden flex p-4 items-center">
 					<button
 						type="button"
 						aria-label="menu"
@@ -48,7 +48,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 						<BiMenu size={24} />
 					</button>
 				</header>
-				<main>{children}</main>
+				<main className="overflow-y-auto">{children}</main>
 			</div>
 		</div>
 	);
