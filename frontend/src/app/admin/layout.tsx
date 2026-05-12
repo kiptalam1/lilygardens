@@ -19,7 +19,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 	}, [sidebarOpen]);
 
 	return (
-		<div className="h-screen bg-surface text-text grid md:grid-cols-[240px_1fr]">
+		<div className="min-h-screen bg-surface text-text grid md:grid-cols-[240px_1fr]">
 			{/* desktop sidebar */}
 			<aside className="hidden md:block border-r border-border overflow-y-auto">
 				<Sidebar />
