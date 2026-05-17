@@ -48,7 +48,7 @@ export default function Sidebar() {
 
 			<div className="p-2 hover:bg-surface transition duration-150 text-sm md:text-lg font-semibold rounded-md flex items-center gap-4">
 				<GrSettingsOption size={24} />
-				<Link href="/" className=" ">
+				<Link href="/admin/settings" className=" ">
 					Settings
 				</Link>
 			</div>
