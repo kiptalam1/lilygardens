@@ -14,6 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(errorHandler);
 
-app.listen(() => {
+app.listen(PORT, () => {
 	console.log(`Listening at port ${PORT}`);
 });
