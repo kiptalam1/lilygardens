@@ -1,0 +1,6 @@
+allowBuilds:
+  '@prisma/engines': true
+  bcrypt: true
+  esbuild: true
+  node-base64: true
+  prisma: true
