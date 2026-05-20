@@ -15,13 +15,6 @@ export function errorHandler(
 		});
 	}
 
-	// native JS Error
-	if (err instanceof Error) {
-		return res.status(500).json({
-			error: err.message,
-		});
-	}
-
 	// fallback for completely unknown values
 	return res.status(500).json({
 		error: "Internal Server Error",
