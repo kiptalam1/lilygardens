@@ -15,3 +15,12 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const Capacity = {
+  ONEBEDROOM: 'ONEBEDROOM',
+  BEDSITTER: 'BEDSITTER',
+  SHOP: 'SHOP'
+} as const
+
+export type Capacity = (typeof Capacity)[keyof typeof Capacity]

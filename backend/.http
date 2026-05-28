@@ -1,0 +1,10 @@
+### Create a new room
+POST http://localhost:5000/api/rooms/create
+Content-Type: application/json
+
+{ 
+  "name": "room 1",
+  "capacity": "ONEBEDROOM",
+  "rentAmount": "6000",
+  "description": "the first room to ever be created"
+}
