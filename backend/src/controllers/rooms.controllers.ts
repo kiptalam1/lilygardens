@@ -21,6 +21,7 @@ export const createRoom = asyncHandler(async (req, res) => {
     res.status(400).json({
       error: `Room must be one of ${Object.values(Capacity).join(", ")}`,
     });
+    return;
   }
   // check if the room already exists;
   const room = await prisma.room.findUnique({
@@ -40,7 +41,7 @@ export const createRoom = asyncHandler(async (req, res) => {
     data: {
       name,
       capacity,
-      rentAmount: Number(rentAmount) ?? null,
+      rentAmount: rentAmount !== null ? Number(rentAmount) : null,
       description: description ?? "",
     },
   });
