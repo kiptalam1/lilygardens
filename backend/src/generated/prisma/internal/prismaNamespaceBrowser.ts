@@ -54,7 +54,8 @@ export const ModelName = {
   User: 'User',
   Tenant: 'Tenant',
   Room: 'Room',
-  Tenancy: 'Tenancy'
+  Tenancy: 'Tenancy',
+  TenantTenancy: 'TenantTenancy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -127,6 +128,17 @@ export const TenancyScalarFieldEnum = {
 } as const
 
 export type TenancyScalarFieldEnum = (typeof TenancyScalarFieldEnum)[keyof typeof TenancyScalarFieldEnum]
+
+
+export const TenantTenancyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  tenancyId: 'tenancyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenantTenancyScalarFieldEnum = (typeof TenantTenancyScalarFieldEnum)[keyof typeof TenantTenancyScalarFieldEnum]
 
 
 export const SortOrder = {

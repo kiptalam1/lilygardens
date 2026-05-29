@@ -61,3 +61,8 @@ export type Room = Prisma.RoomModel
  * 
  */
 export type Tenancy = Prisma.TenancyModel
+/**
+ * Model TenantTenancy
+ * 
+ */
+export type TenantTenancy = Prisma.TenantTenancyModel

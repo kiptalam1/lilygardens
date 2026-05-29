@@ -215,6 +215,7 @@ export type TenancyWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
+  tenantTenancies?: Prisma.TenantTenancyListRelationFilter
 }
 
 export type TenancyOrderByWithRelationInput = {
@@ -228,6 +229,7 @@ export type TenancyOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   room?: Prisma.RoomOrderByWithRelationInput
+  tenantTenancies?: Prisma.TenantTenancyOrderByRelationAggregateInput
 }
 
 export type TenancyWhereUniqueInput = Prisma.AtLeast<{
@@ -244,6 +246,7 @@ export type TenancyWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
+  tenantTenancies?: Prisma.TenantTenancyListRelationFilter
 }, "id">
 
 export type TenancyOrderByWithAggregationInput = {
@@ -286,6 +289,7 @@ export type TenancyCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutTenanciesInput
+  tenantTenancies?: Prisma.TenantTenancyCreateNestedManyWithoutTenancyInput
 }
 
 export type TenancyUncheckedCreateInput = {
@@ -298,6 +302,7 @@ export type TenancyUncheckedCreateInput = {
   endDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantTenancies?: Prisma.TenantTenancyUncheckedCreateNestedManyWithoutTenancyInput
 }
 
 export type TenancyUpdateInput = {
@@ -310,6 +315,7 @@ export type TenancyUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutTenanciesNestedInput
+  tenantTenancies?: Prisma.TenantTenancyUpdateManyWithoutTenancyNestedInput
 }
 
 export type TenancyUncheckedUpdateInput = {
@@ -322,6 +328,7 @@ export type TenancyUncheckedUpdateInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantTenancies?: Prisma.TenantTenancyUncheckedUpdateManyWithoutTenancyNestedInput
 }
 
 export type TenancyCreateManyInput = {
@@ -405,6 +412,11 @@ export type TenancyMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type TenancyScalarRelationFilter = {
+  is?: Prisma.TenancyWhereInput
+  isNot?: Prisma.TenancyWhereInput
+}
+
 export type TenancyCreateNestedManyWithoutRoomInput = {
   create?: Prisma.XOR<Prisma.TenancyCreateWithoutRoomInput, Prisma.TenancyUncheckedCreateWithoutRoomInput> | Prisma.TenancyCreateWithoutRoomInput[] | Prisma.TenancyUncheckedCreateWithoutRoomInput[]
   connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutRoomInput | Prisma.TenancyCreateOrConnectWithoutRoomInput[]
@@ -459,6 +471,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type TenancyCreateNestedOneWithoutTenantTenanciesInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedCreateWithoutTenantTenanciesInput>
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutTenantTenanciesInput
+  connect?: Prisma.TenancyWhereUniqueInput
+}
+
+export type TenancyUpdateOneRequiredWithoutTenantTenanciesNestedInput = {
+  create?: Prisma.XOR<Prisma.TenancyCreateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedCreateWithoutTenantTenanciesInput>
+  connectOrCreate?: Prisma.TenancyCreateOrConnectWithoutTenantTenanciesInput
+  upsert?: Prisma.TenancyUpsertWithoutTenantTenanciesInput
+  connect?: Prisma.TenancyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TenancyUpdateToOneWithWhereWithoutTenantTenanciesInput, Prisma.TenancyUpdateWithoutTenantTenanciesInput>, Prisma.TenancyUncheckedUpdateWithoutTenantTenanciesInput>
+}
+
 export type TenancyCreateWithoutRoomInput = {
   id?: string
   householdType: $Enums.HouseHoldType
@@ -468,6 +494,7 @@ export type TenancyCreateWithoutRoomInput = {
   endDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantTenancies?: Prisma.TenantTenancyCreateNestedManyWithoutTenancyInput
 }
 
 export type TenancyUncheckedCreateWithoutRoomInput = {
@@ -479,6 +506,7 @@ export type TenancyUncheckedCreateWithoutRoomInput = {
   endDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  tenantTenancies?: Prisma.TenantTenancyUncheckedCreateNestedManyWithoutTenancyInput
 }
 
 export type TenancyCreateOrConnectWithoutRoomInput = {
@@ -522,6 +550,70 @@ export type TenancyScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Tenancy"> | Date | string
 }
 
+export type TenancyCreateWithoutTenantTenanciesInput = {
+  id?: string
+  householdType: $Enums.HouseHoldType
+  status: $Enums.TenancyStatus
+  notes?: string | null
+  startDate?: Date | string
+  endDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  room: Prisma.RoomCreateNestedOneWithoutTenanciesInput
+}
+
+export type TenancyUncheckedCreateWithoutTenantTenanciesInput = {
+  id?: string
+  roomId: string
+  householdType: $Enums.HouseHoldType
+  status: $Enums.TenancyStatus
+  notes?: string | null
+  startDate?: Date | string
+  endDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TenancyCreateOrConnectWithoutTenantTenanciesInput = {
+  where: Prisma.TenancyWhereUniqueInput
+  create: Prisma.XOR<Prisma.TenancyCreateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedCreateWithoutTenantTenanciesInput>
+}
+
+export type TenancyUpsertWithoutTenantTenanciesInput = {
+  update: Prisma.XOR<Prisma.TenancyUpdateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedUpdateWithoutTenantTenanciesInput>
+  create: Prisma.XOR<Prisma.TenancyCreateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedCreateWithoutTenantTenanciesInput>
+  where?: Prisma.TenancyWhereInput
+}
+
+export type TenancyUpdateToOneWithWhereWithoutTenantTenanciesInput = {
+  where?: Prisma.TenancyWhereInput
+  data: Prisma.XOR<Prisma.TenancyUpdateWithoutTenantTenanciesInput, Prisma.TenancyUncheckedUpdateWithoutTenantTenanciesInput>
+}
+
+export type TenancyUpdateWithoutTenantTenanciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  householdType?: Prisma.EnumHouseHoldTypeFieldUpdateOperationsInput | $Enums.HouseHoldType
+  status?: Prisma.EnumTenancyStatusFieldUpdateOperationsInput | $Enums.TenancyStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  room?: Prisma.RoomUpdateOneRequiredWithoutTenanciesNestedInput
+}
+
+export type TenancyUncheckedUpdateWithoutTenantTenanciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  roomId?: Prisma.StringFieldUpdateOperationsInput | string
+  householdType?: Prisma.EnumHouseHoldTypeFieldUpdateOperationsInput | $Enums.HouseHoldType
+  status?: Prisma.EnumTenancyStatusFieldUpdateOperationsInput | $Enums.TenancyStatus
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TenancyCreateManyRoomInput = {
   id?: string
   householdType: $Enums.HouseHoldType
@@ -542,6 +634,7 @@ export type TenancyUpdateWithoutRoomInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantTenancies?: Prisma.TenantTenancyUpdateManyWithoutTenancyNestedInput
 }
 
 export type TenancyUncheckedUpdateWithoutRoomInput = {
@@ -553,6 +646,7 @@ export type TenancyUncheckedUpdateWithoutRoomInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tenantTenancies?: Prisma.TenantTenancyUncheckedUpdateManyWithoutTenancyNestedInput
 }
 
 export type TenancyUncheckedUpdateManyWithoutRoomInput = {
@@ -567,6 +661,35 @@ export type TenancyUncheckedUpdateManyWithoutRoomInput = {
 }
 
 
+/**
+ * Count Type TenancyCountOutputType
+ */
+
+export type TenancyCountOutputType = {
+  tenantTenancies: number
+}
+
+export type TenancyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tenantTenancies?: boolean | TenancyCountOutputTypeCountTenantTenanciesArgs
+}
+
+/**
+ * TenancyCountOutputType without action
+ */
+export type TenancyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TenancyCountOutputType
+   */
+  select?: Prisma.TenancyCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TenancyCountOutputType without action
+ */
+export type TenancyCountOutputTypeCountTenantTenanciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TenantTenancyWhereInput
+}
+
 
 export type TenancySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -579,6 +702,8 @@ export type TenancySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  tenantTenancies?: boolean | Prisma.Tenancy$tenantTenanciesArgs<ExtArgs>
+  _count?: boolean | Prisma.TenancyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tenancy"]>
 
 export type TenancySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -622,6 +747,8 @@ export type TenancySelectScalar = {
 export type TenancyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "householdType" | "status" | "notes" | "startDate" | "endDate" | "createdAt" | "updatedAt", ExtArgs["result"]["tenancy"]>
 export type TenancyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
+  tenantTenancies?: boolean | Prisma.Tenancy$tenantTenanciesArgs<ExtArgs>
+  _count?: boolean | Prisma.TenancyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TenancyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
@@ -634,6 +761,7 @@ export type $TenancyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Tenancy"
   objects: {
     room: Prisma.$RoomPayload<ExtArgs>
+    tenantTenancies: Prisma.$TenantTenancyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1040,6 +1168,7 @@ readonly fields: TenancyFieldRefs;
 export interface Prisma__TenancyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tenantTenancies<T extends Prisma.Tenancy$tenantTenanciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tenancy$tenantTenanciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TenantTenancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1476,6 +1605,30 @@ export type TenancyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Tenancies to delete.
    */
   limit?: number
+}
+
+/**
+ * Tenancy.tenantTenancies
+ */
+export type Tenancy$tenantTenanciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TenantTenancy
+   */
+  select?: Prisma.TenantTenancySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TenantTenancy
+   */
+  omit?: Prisma.TenantTenancyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TenantTenancyInclude<ExtArgs> | null
+  where?: Prisma.TenantTenancyWhereInput
+  orderBy?: Prisma.TenantTenancyOrderByWithRelationInput | Prisma.TenantTenancyOrderByWithRelationInput[]
+  cursor?: Prisma.TenantTenancyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TenantTenancyScalarFieldEnum | Prisma.TenantTenancyScalarFieldEnum[]
 }
 
 /**

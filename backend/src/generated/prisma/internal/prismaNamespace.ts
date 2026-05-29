@@ -387,7 +387,8 @@ export const ModelName = {
   User: 'User',
   Tenant: 'Tenant',
   Room: 'Room',
-  Tenancy: 'Tenancy'
+  Tenancy: 'Tenancy',
+  TenantTenancy: 'TenantTenancy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "tenant" | "room" | "tenancy"
+    modelProps: "user" | "tenant" | "room" | "tenancy" | "tenantTenancy"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TenantTenancy: {
+      payload: Prisma.$TenantTenancyPayload<ExtArgs>
+      fields: Prisma.TenantTenancyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TenantTenancyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TenantTenancyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        findFirst: {
+          args: Prisma.TenantTenancyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TenantTenancyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        findMany: {
+          args: Prisma.TenantTenancyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>[]
+        }
+        create: {
+          args: Prisma.TenantTenancyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        createMany: {
+          args: Prisma.TenantTenancyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TenantTenancyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>[]
+        }
+        delete: {
+          args: Prisma.TenantTenancyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        update: {
+          args: Prisma.TenantTenancyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        deleteMany: {
+          args: Prisma.TenantTenancyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TenantTenancyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TenantTenancyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>[]
+        }
+        upsert: {
+          args: Prisma.TenantTenancyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TenantTenancyPayload>
+        }
+        aggregate: {
+          args: Prisma.TenantTenancyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTenantTenancy>
+        }
+        groupBy: {
+          args: Prisma.TenantTenancyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TenantTenancyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TenantTenancyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TenantTenancyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -796,6 +871,17 @@ export const TenancyScalarFieldEnum = {
 } as const
 
 export type TenancyScalarFieldEnum = (typeof TenancyScalarFieldEnum)[keyof typeof TenancyScalarFieldEnum]
+
+
+export const TenantTenancyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  tenancyId: 'tenancyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenantTenancyScalarFieldEnum = (typeof TenantTenancyScalarFieldEnum)[keyof typeof TenantTenancyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1053,6 +1139,7 @@ export type GlobalOmitConfig = {
   tenant?: Prisma.TenantOmit
   room?: Prisma.RoomOmit
   tenancy?: Prisma.TenancyOmit
+  tenantTenancy?: Prisma.TenantTenancyOmit
 }
 
 /* Types for Logging */
