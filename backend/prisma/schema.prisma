@@ -20,15 +20,16 @@ model User {
 }
 
 model Tenant {
-  id          String   @id @default(uuid())
-  fullName    String
-  nationalId  String?
-  phoneNumber String
-  email       String?  @unique
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id              String          @id @default(uuid())
+  fullName        String
+  nationalId      String?         @unique
+  phoneNumber     String?         @unique
+  email           String?         @unique
+  userId          String?
+  user            User?           @relation(fields: [userId], references: [id])
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  tenantTenancies TenantTenancy[]
 }
 
 model Room {
@@ -43,16 +44,32 @@ model Room {
 }
 
 model Tenancy {
-  id            String        @id @default(uuid())
-  roomId        String
-  room          Room          @relation(fields: [roomId], references: [id])
-  householdType HouseHoldType
-  status        TenancyStatus
-  notes         String?       @db.Text
-  startDate     DateTime      @default(now())
-  endDate       DateTime?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id              String          @id @default(uuid())
+  roomId          String
+  room            Room            @relation(fields: [roomId], references: [id])
+  householdType   HouseHoldType
+  status          TenancyStatus
+  notes           String?         @db.Text
+  startDate       DateTime        @default(now())
+  endDate         DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  tenantTenancies TenantTenancy[]
+
+  @@index([roomId, status])
+}
+
+model TenantTenancy {
+  id        String @id @default(uuid())
+  tenantId  String
+  tenancyId String
+
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  tenancy   Tenancy  @relation(fields: [tenancyId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenancyId, tenantId])
 }
 
 enum Role {

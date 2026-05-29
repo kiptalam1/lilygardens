@@ -11,3 +11,27 @@ Content-Type: application/json
 
 ### Fetch all rooms
 GET http://localhost:5000/api/rooms/
+
+### Create new Tenancy
+POST http://localhost:5000/api/tenancies/create
+Content-Type: application/json
+
+{ 
+  "roomId": "c7317a15-b11f-4007-a397-1e189b0984d0",
+  "householdType": "SHARED",
+  "startDate": "2026-05-29",
+  "endDate": "",
+  "tenants": [{
+    "fullName": "Benon Mutai",
+  "phone": "0769206505",
+  "nationalId": "",
+  "email": ""
+}, {
+
+   "fullName": "Candy Mabonga",
+  "phone": "0763241504",
+  "nationalId": "",
+  "email": ""
+
+}]
+}
