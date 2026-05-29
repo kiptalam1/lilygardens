@@ -52,7 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Room: 'Room'
+  Tenant: 'Tenant',
+  Room: 'Room',
+  Tenancy: 'Tenancy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,6 +87,20 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const TenantScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  nationalId: 'nationalId',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
 export const RoomScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -96,6 +112,21 @@ export const RoomScalarFieldEnum = {
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const TenancyScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  householdType: 'householdType',
+  status: 'status',
+  notes: 'notes',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TenancyScalarFieldEnum = (typeof TenancyScalarFieldEnum)[keyof typeof TenancyScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -11,7 +11,8 @@
 
 export const Role = {
   TENANT: 'TENANT',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  USER: 'USER'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -24,3 +25,20 @@ export const Capacity = {
 } as const
 
 export type Capacity = (typeof Capacity)[keyof typeof Capacity]
+
+
+export const HouseHoldType = {
+  FAMILY: 'FAMILY',
+  SHARED: 'SHARED'
+} as const
+
+export type HouseHoldType = (typeof HouseHoldType)[keyof typeof HouseHoldType]
+
+
+export const TenancyStatus = {
+  ACTIVE: 'ACTIVE',
+  ENDED: 'ENDED',
+  TERMINATED: 'TERMINATED'
+} as const
+
+export type TenancyStatus = (typeof TenancyStatus)[keyof typeof TenancyStatus]

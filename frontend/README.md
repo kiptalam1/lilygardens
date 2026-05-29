@@ -27,7 +27,9 @@ id
 fullName
 nationalId
 phone
-email?           emergencyContact?userId?           // nullable FK -> Users.id
+email?         
+emergencyContact?
+userId?           // nullable FK -> Users.id
 createdAt
 updatedAt
 userId is optional because not all tenants need accounts.
@@ -48,7 +50,7 @@ This is the most important table.
 5. TenancyTenants
 Join table for multi-occupancy.
 id
-tenancyId         // FK -> Tenancies.id
+tenancyId         //FK -> Tenancies.id
 tenantId          // FK -> Tenants.id
 isPrimaryContact
 rentShare?
