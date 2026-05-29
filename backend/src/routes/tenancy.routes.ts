@@ -3,6 +3,6 @@ import { createTenancy } from "../controllers/tenancy.controllers";
 
 const router: Router = express.Router();
 
-router.post("/create", createTenancy);
+router.post("/", createTenancy);
 
 export default router;
