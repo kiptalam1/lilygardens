@@ -9,6 +9,11 @@ interface RoomProps {
   description?: string;
 }
 
+export const getAllRooms = asyncHandler(async (_req, res) => {
+  const rooms = await prisma.room.findMany();
+  res.status(200).json({ data: rooms });
+});
+
 export const createRoom = asyncHandler(async (req, res) => {
   const { name, capacity, rentAmount, description }: RoomProps = req.body;
   if (!name || !capacity) {

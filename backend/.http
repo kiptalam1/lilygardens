@@ -8,3 +8,6 @@ Content-Type: application/json
   "rentAmount": "6000",
   "description": "the first room to ever be created"
 }
+
+### Fetch all rooms
+GET http://localhost:5000/api/rooms/
