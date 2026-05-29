@@ -46,6 +46,17 @@ export const createTenancy = asyncHandler(async (req, res) => {
     return;
   }
 
+  let parsedEndDate: Date | null = null;
+  if (endDate) {
+    parsedEndDate = new Date(endDate);
+    if (isNaN(parsedEndDate.getTime())) {
+      res.status(400).json({
+        error:
+          "Invalid endDate format. Use ISO 8601 (e.g. 2026-05-29T00:00:00Z)",
+      });
+      return;
+    }
+  }
   if (!Object.values(HouseHoldType).includes(householdType)) {
     res.status(400).json({
       error: `Household must be one of ${Object.values(HouseHoldType).join(", ")}`,
@@ -61,7 +72,7 @@ export const createTenancy = asyncHandler(async (req, res) => {
   }
 
   for (let tenant of tenants) {
-    if (tenant.fullName === "") {
+    if (!tenant.fullName || !tenant.fullName.trim()) {
       res.status(400).json({
         error: "Tenant names must be provided",
       });
@@ -101,7 +112,7 @@ export const createTenancy = asyncHandler(async (req, res) => {
         roomId: roomExists.id,
         status: TenancyStatus.ACTIVE,
         startDate: parsedStartDate,
-        endDate: endDate ? new Date(endDate) : null,
+        endDate: parsedEndDate,
       },
     });
 
