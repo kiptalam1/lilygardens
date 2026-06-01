@@ -35,3 +35,6 @@ Content-Type: application/json
 
 }]
 }
+
+### Fetch all tenants
+GET http://localhost:5000/api/tenants/
